@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
 use Gt\Measures\Domain\Measure;
 use PHPUnit\Framework\TestCase;
