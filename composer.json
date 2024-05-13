@@ -1,0 +1,17 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+
+    "autoload": {
+        "psr-4": {"Gt\\Measures\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "spatie/data-transfer-object": "^3.9"
+    }
+}
