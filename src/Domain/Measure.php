@@ -2,6 +2,8 @@
 
 namespace Gt\Measures\Domain;
 
+use Spatie\DataTransferObject\DataTransferObject;
+
 class Measure
 {
     private int $timestamp;
@@ -38,6 +40,14 @@ class Measure
     public function setValue(float $value): Measure
     {
         $this->value = $value;
+        return $this;
+    }
+
+    public function fromArray($data) : self{
+        $this->timestamp = intval($data[0]);
+        $this->metric = $data[1];
+        $this->value = $data[2];
+
         return $this;
     }
 }
