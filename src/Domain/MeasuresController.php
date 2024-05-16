@@ -54,10 +54,10 @@ class MeasuresController
         $loader = new Loader();
         $measures = $loader->loadMeasures($file);
 
-        /** @var Measure[][] $groupedByDay */
-        $groupedByDay = Grouper::group($measures, $keyGetter);
+        /** @var Measure[][] $groups */
+        $groups = Grouper::group($measures, $keyGetter);
 
         return array_map(fn($group) => (new ComputedMeasure())->computeFromMeasures($group, $dayCalculator),
-            $groupedByDay);
+            $groups);
     }
 }

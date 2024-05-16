@@ -67,8 +67,8 @@ class ComputedMeasure
 
         $this->sum = $sum;
         $this->peakValue = $peakMeasure->getValue();
-        $this->peakTimestamp = $peakMeasure->getTimestamp();
 
+        // the peak date must be an exact date
         $this->peakDate = Carbon::createFromTimestamp($peakMeasure->getTimestamp(), $calculator->getTimeZone());
 
         $timestamp = 0;
@@ -77,6 +77,7 @@ class ComputedMeasure
             $timestamp = $measure->getTimestamp();
         }
 
+        // the first column - must be the shifted date, this way the first column may be different from the peak date by 1 day
         $this->date = $calculator->getShiftedDate($timestamp);
 
         return $this;
