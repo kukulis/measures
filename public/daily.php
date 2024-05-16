@@ -1,26 +1,15 @@
 <?php
-
-use Gt\Measures\Domain\ComputedMeasure;
-use Gt\Measures\Domain\Loader;
-use Gt\Measures\Domain\Measure;
-use Gt\Measures\Util\Grouper;
-
 include __DIR__.'/../vendor/autoload.php';
-$file = __DIR__.'/../data/data.csv';
 
-$loader = new Loader();
+$controller = new \Gt\Measures\Domain\MeasuresController();
 
-$measures = $loader->loadMeasures($file);
-
-$groupedByDay = Grouper::group($measures, fn(Measure $measure)=> $measure->getDayStart());
-
-$computedMeasures = [];
-foreach ($groupedByDay as $day => $group ) {
-    $computedMeasures[] = (new ComputedMeasure())->computeFromMeasures($group);
-}
-
+$computedMeasures = $controller->prepareDailyMeasures(
+    __DIR__ . '/../data/data.csv',
+    new DateTimeZone('Europe/Vilnius'),
+    8 * 60 * 60
+);
 ?>
-<html>
+<html lang="en">
 <body>
 <h1>Daily</h1>
 <table>

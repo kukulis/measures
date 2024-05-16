@@ -22,12 +22,12 @@ class CompareDayCalculatorTest extends TestCase
     public function testDay(int $timestampShift, DateTimeZone $timezone, $timestamp, $expectedDay)
     {
         $calculator = new DirectDayCalculator($timezone, $timestampShift);
-        $day = $calculator->getDay($timestamp);
+        $day = $calculator->getDayKey($timestamp);
         $this->assertEquals($expectedDay, $day);
 
         $calculatorSmart = new SmartDayCalculator($timezone, $timestampShift);
 
-        $daySmart = $calculatorSmart->getDay($timestamp);
+        $daySmart = $calculatorSmart->getDayKey($timestamp);
         $this->assertEquals($expectedDay, $daySmart);
     }
 

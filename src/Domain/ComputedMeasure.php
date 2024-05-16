@@ -2,19 +2,21 @@
 
 namespace Gt\Measures\Domain;
 
+use DateTimeInterface;
+
 class ComputedMeasure
 {
-    private string $date;
+    private DateTimeInterface $date;
     private float $sum;
     private float $peakValue;
     private int $peakTimestamp;
 
-    public function getDate(): string
+    public function getDate(): DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(string $date): ComputedMeasure
+    public function setDate(DateTimeInterface $date): ComputedMeasure
     {
         $this->date = $date;
         return $this;
@@ -56,20 +58,18 @@ class ComputedMeasure
     /**
      * @param Measure[] $measures
      */
-    public function computeFromMeasures(array $measures) : self {
+    public function computeFromMeasures(array $measures): self
+    {
         $peakMeasure = (new Measure())->setValue(0);
         $sum = 0;
         foreach ($measures as $measure) {
-             $peakMeasure = $peakMeasure->bigger($measure);
-             $sum += $measure->getValue();
+            $peakMeasure = $peakMeasure->bigger($measure);
+            $sum += $measure->getValue();
         }
 
         $this->sum = $sum;
         $this->peakValue = $peakMeasure->getValue();
         $this->peakTimestamp = $peakMeasure->getTimestamp();
-
-        // TODO calculate date
-        $this->date = 'TODO';
 
         return $this;
     }

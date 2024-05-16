@@ -2,9 +2,9 @@
 
 namespace Gt\Measures\Domain;
 
-use Carbon\Carbon;
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use DateTimeZone;
 
 class DirectDayCalculator implements IDayCalculator
@@ -18,20 +18,22 @@ class DirectDayCalculator implements IDayCalculator
         $this->timestampShift = $timestampShift;
     }
 
-    public function getDayCarbon(int $timestamp): string
+    public function getDayKey(int $timestamp): string
     {
-        $date = Carbon::createFromTimestamp($timestamp, $this->timeZone);
-
-        $hourShift = $this->timestampShift / (60 * 60);
-        $hour = $date->format('H');
-        if ($hour < $hourShift) {
-            $date->add(DateInterval::createFromDateString('-1 day')); // prepare interval in constructor
-        }
-
-        return $date->format('Y-m-d');
+        return $this->getShiftedDate($timestamp)->format('Y-m-d');
     }
 
-    public function getDay(int $timestamp): string
+    public function getWeekKey(int $timestamp): string
+    {
+        return $this->getShiftedDate($timestamp)->format('Y-W');
+    }
+
+    public function getMonthKey(int $timestamp): string
+    {
+        return $this->getShiftedDate($timestamp)->format('Y-m');
+    }
+
+    public function getShiftedDate(int $timestamp): DateTimeInterface
     {
         $date = (new DateTime())->setTimestamp($timestamp);
         $date->setTimezone($this->timeZone);
@@ -40,14 +42,11 @@ class DirectDayCalculator implements IDayCalculator
         $hour = $date->format('H');
 
         if ($hour < $hourShift) {
-            $date->add(DateInterval::createFromDateString('-1 day')); // prepare interval in constructor
+            $date->add(DateInterval::createFromDateString('-1 day'));
         }
 
-        // format doesn't take correct timezone
-        return $date->format('Y-m-d');
+        return $date;
     }
-
-
 
     public function getTimeZone(): DateTimeZone
     {
@@ -58,9 +57,4 @@ class DirectDayCalculator implements IDayCalculator
     {
         return $this->timestampShift;
     }
-
-    // TODO week
-    // TODO month
-
-
 }

@@ -2,8 +2,6 @@
 
 namespace Gt\Measures\Domain;
 
-use Gt\Measures\Util\Bounder;
-
 class Measure
 {
     const DAY_LENGTH = 24* 60*60;
@@ -55,11 +53,6 @@ class Measure
     }
 
     // month start much more complex
-    public function getDayStart() : float {
-        // TODO shift by hour 08:00:00 and cover with test
-        return Bounder::step($this->timestamp, self::DAY_LENGTH );
-    }
-
     public function bigger(Measure $measure) : self {
         if ( $measure->getValue() > $this->value) {
             return $measure;

@@ -20,12 +20,32 @@ class SmartDayCalculator implements IDayCalculator
     /**
      * simply lets remove shift from timestamp, before transforming to date object
      */
-    public function getDay(int $timestamp): string
+    public function getDayKey(int $timestamp): string
     {
-        $date = Carbon::createFromTimestamp( $timestamp-$this->timestampShift, $this->timeZone );
+        $date = $this->getShiftedDate($timestamp);
 
         return $date->format('Y-m-d');
     }
+
+
+    public function getWeekKey(int $timestamp): string
+    {
+        $date = $this->getShiftedDate($timestamp);
+
+        return $date->format('Y-W');
+    }
+
+    public function getMonthKey(int $timestamp): string
+    {
+        $date = $this->getShiftedDate($timestamp);
+
+        return $date->format('Y-m');
+    }
+
+    public function getShiftedDate(int $timestamp) : Carbon {
+        return Carbon::createFromTimestamp( $timestamp-$this->timestampShift, $this->timeZone );
+    }
+
 
     public function getTimestampShift(): int
     {
@@ -36,4 +56,5 @@ class SmartDayCalculator implements IDayCalculator
     {
         return $this->timeZone;
     }
+
 }
