@@ -12,6 +12,7 @@
         }
     },
     "require": {
-        "spatie/data-transfer-object": "^3.9"
+        "spatie/data-transfer-object": "^3.9",
+        "nesbot/carbon": "^3.3"
     }
 }

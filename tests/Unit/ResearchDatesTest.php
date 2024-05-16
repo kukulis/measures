@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 
 class ResearchDatesTest extends TestCase
@@ -54,6 +55,14 @@ class ResearchDatesTest extends TestCase
         // representationY = '2024-05-16 00:00:00'
         // to get the same representation with zone +3 we need -3 hours lesser timestamp.
         $this->assertEquals(-3, $hoursDiff4);
+
+        $carbonDate = Carbon::createFromTimestamp($timestamp, new \DateTimeZone('UTC'));
+
+        $formattedDate = $carbonDate->format('Y-m-d H:i:s T');
+
+        $this->assertEquals( '2024-05-16 00:00:00 UTC', $formattedDate );
+
+        echo "utc timestamp=$timestamp\n";
     }
 
 }
