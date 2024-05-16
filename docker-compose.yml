@@ -1,0 +1,11 @@
+services:
+  measures:
+    image: gt/measures:latest
+    container_name: measures
+    build:
+      context: ./
+      dockerfile: .docker/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8765:80"
