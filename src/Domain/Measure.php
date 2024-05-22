@@ -4,8 +4,11 @@ namespace Gt\Measures\Domain;
 
 class Measure
 {
-    const DAY_LENGTH = 24* 60*60;
-    const WEEK_LENGTH = 7*24*60*60;
+//    const DAY_LENGTH = 24* 60*60;
+//    const WEEK_LENGTH = 7*24*60*60;
+
+// we begining of the week in some date 2000 or 1970 we have timestamp of this date - startTimestamp
+// floor( (currentTimestamp - startTimestamp)  / WEEK_LENGTH )
 
     private int $timestamp;
     private string $metric;

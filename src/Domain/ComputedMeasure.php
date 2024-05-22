@@ -82,4 +82,8 @@ class ComputedMeasure
 
         return $this;
     }
+
+//    public function getQuarter() {
+//        $quarter = floor($date->month / 3);
+//    }
 }

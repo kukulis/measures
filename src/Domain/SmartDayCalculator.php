@@ -57,4 +57,17 @@ class SmartDayCalculator implements IDayCalculator
         return $this->timeZone;
     }
 
+    public function getQuarterKey(int $timestamp): string
+    {
+        $date = $this->getShiftedDate($timestamp);
+
+//        $quarter = floor($date->month / 3);
+
+
+        return sprintf( '%s-%s', $date->year, $date->quarter );
+
+//        return $date->format('Y-Q');
+    }
+
+
 }

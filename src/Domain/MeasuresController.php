@@ -46,6 +46,16 @@ class MeasuresController
         );
     }
 
+    public function prepareQuarterMeasures(string $file, DateTimeZone $dateTimeZone, int $timeShift): array
+    {
+        $dayCalculator = new SmartDayCalculator($dateTimeZone, $timeShift);
+        return $this->innerPrepare(
+            $file,
+            fn(Measure $measure) => $dayCalculator->getQuarterKey($measure->getTimestamp()),
+            $dayCalculator
+        );
+    }
+
     /**
      * @return ComputedMeasure[]
      */

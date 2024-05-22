@@ -57,4 +57,12 @@ class DirectDayCalculator implements IDayCalculator
     {
         return $this->timestampShift;
     }
+
+    public function getQuarterKey(int $timestamp): string
+    {
+        // TODO: Implement getQuarterKey() method.
+        return '';
+    }
+
+
 }
