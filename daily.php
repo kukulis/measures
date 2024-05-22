@@ -4,7 +4,7 @@ include __DIR__ . '/vendor/autoload.php';
 $controller = new \Gt\Measures\Domain\MeasuresController();
 
 $timeZone = 'Europe/Vilnius';
-$shiftHours = 8;
+$shiftHours = 8; // 1 or  0
 
 $computedMeasures = $controller->prepareDailyMeasures(
     __DIR__ . '/data/data.csv',

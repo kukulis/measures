@@ -8,6 +8,7 @@
     <li><a href="daily.php">Daily</a></li>
     <li><a href="weekly.php">Weekly</a></li>
     <li><a href="monthly.php">Monthly</a></li>
+    <li><a href="quarter.php">Quarter</a></li>
 </ul>
 </body>
 </html>

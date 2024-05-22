@@ -14,5 +14,7 @@ interface IDayCalculator
     public function getWeekKey(int $timestamp): string;
     public function getMonthKey(int $timestamp): string;
 
+    public function getQuarterKey(int $timestamp) : string;
+
     public function getShiftedDate(int $timestamp) : DateTimeInterface;
 }
